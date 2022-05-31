@@ -11,7 +11,7 @@
     <groupId>kr.co.ffm</groupId>
     <artifactId>agent-ffm-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>agent-ffm-project</name>
     <description>agent-ffm-project</description>
     <properties>
