@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public interface CommunicationService {
     public String receiveControl(Control control);
     public void sendFeeding();
-    public void sendWatertankStatus();
+    public void sendWatertankStatus(WatertankStatus watertankStatus);
     public void sendWatertank();
 }

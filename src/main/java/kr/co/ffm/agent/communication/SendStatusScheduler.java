@@ -1,5 +1,6 @@
 package kr.co.ffm.agent.communication;
 
+import kr.co.ffm.agent.work.TemperatureUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,9 @@ public class SendStatusScheduler {
         if (!CommunicationServiceImpl.isWatertankInfoSaved) {
             communicationService.sendWatertank();
         } else {
-            communicationUtil.autoStatusWatch();
+            TemperatureUtil temperatureUtil = new TemperatureUtil(4);
+            WatertankStatus watertankStatus = new WatertankStatus(temperatureUtil.measure(), 7.5, 22);
+            communicationService.sendWatertankStatus(watertankStatus);
         }
     }
 }

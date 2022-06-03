@@ -11,19 +11,6 @@ import java.util.Map;
 public class CommunicationUtil {
     private Logger logger = LogManager.getLogger(CommunicationUtil.class);
 
-    public void temperatureMeasure() {
-    }
-
-    public void phMeasure() {
-    }
-
-    public void oxygenMeasure() {
-    }
-
-    public void autoStatusWatch() {
-        logger.info("Send WatertankStatus!");
-    }
-
     public void activeStatusWatch() {
     }
 

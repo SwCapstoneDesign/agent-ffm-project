@@ -54,8 +54,46 @@ public class CommunicationServiceImpl implements CommunicationService {
     }
 
     @Override
-    public void sendWatertankStatus() {
+    public void sendWatertankStatus(WatertankStatus watertankStatus) {
+        String watertankId = CommunicationServiceImpl.watertankInfo.getProperty("id");
+        String url = "http://" + systemInfo.getProperty("system.ipaddress") + "/status";
 
+        Gson statusInfo = new Gson();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("watertankId", watertankId);
+        jsonObject.addProperty("temperature", watertankStatus.getTemperature());
+        jsonObject.addProperty("ph", watertankStatus.getPh());
+        jsonObject.addProperty("do", watertankStatus.getOxygen());
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), statusInfo.toJson(jsonObject));
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            Map<String, String> responseParse = communicationUtil.parseResponseCode(response.body().string());
+
+            if ("200".equals(responseParse.get("code"))) {
+                logger.info("");
+                logger.info("====================================================");
+                logger.info("");
+                logger.info("                Send Watertank Status");
+                logger.info("                watertankId : " + watertankId);
+                logger.info("                temperature : " + watertankStatus.getTemperature());
+                logger.info("                ph : " + watertankStatus.getPh());
+                logger.info("                do : " + watertankStatus.getOxygen());
+                logger.info("");
+                logger.info("====================================================");
+            } else {
+                logger.error(responseParse.get("message"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error("IOException Occurred in method sendWatertankStatus");
+        }
     }
 
     @Override
