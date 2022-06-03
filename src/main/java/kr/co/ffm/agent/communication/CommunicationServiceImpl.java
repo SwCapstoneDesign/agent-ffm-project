@@ -64,7 +64,7 @@ public class CommunicationServiceImpl implements CommunicationService {
         jsonObject.addProperty("watertankId", watertankId);
         jsonObject.addProperty("temperature", watertankStatus.getTemperature());
         jsonObject.addProperty("ph", watertankStatus.getPh());
-        jsonObject.addProperty("do", watertankStatus.getOxygen());
+        jsonObject.addProperty("oxygen", watertankStatus.getOxygen());
 
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), statusInfo.toJson(jsonObject));
@@ -84,7 +84,7 @@ public class CommunicationServiceImpl implements CommunicationService {
                 logger.info("                watertankId : " + watertankId);
                 logger.info("                temperature : " + watertankStatus.getTemperature());
                 logger.info("                ph : " + watertankStatus.getPh());
-                logger.info("                do : " + watertankStatus.getOxygen());
+                logger.info("                oxygen : " + watertankStatus.getOxygen());
                 logger.info("");
                 logger.info("====================================================");
             } else {
