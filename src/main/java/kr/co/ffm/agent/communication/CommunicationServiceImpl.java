@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CommunicationServiceImpl implements CommunicationService {
@@ -67,7 +68,11 @@ public class CommunicationServiceImpl implements CommunicationService {
         jsonObject.addProperty("ph", watertankStatus.getPh());
         jsonObject.addProperty("oxygen", watertankStatus.getOxygen());
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient()
+                .newBuilder()
+                .readTimeout(1, TimeUnit.MINUTES)
+                .build();
+
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), statusInfo.toJson(jsonObject));
         Request request = new Request.Builder()
                 .url(url)
