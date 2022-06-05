@@ -11,9 +11,6 @@ import java.util.Map;
 public class CommunicationUtil {
     private Logger logger = LogManager.getLogger(CommunicationUtil.class);
 
-    public void activeStatusWatch() {
-    }
-
     public Map<String, String> parseResponseCode(String response) {
         Map<String, String> responseParse = new Hashtable<String, String>();
 

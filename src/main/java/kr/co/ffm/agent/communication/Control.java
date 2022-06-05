@@ -10,4 +10,14 @@ public class Control implements Serializable {
     String action;
     String target;
     double value;
+
+    @Override
+    public String toString() {
+        return "Control{" +
+                "control='" + control + '\'' +
+                ", action='" + action + '\'' +
+                ", target='" + target + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

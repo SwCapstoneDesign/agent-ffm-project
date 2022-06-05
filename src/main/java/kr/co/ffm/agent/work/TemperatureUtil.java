@@ -86,8 +86,6 @@ public class TemperatureUtil {
 		}
 		
 		System.out.println("End Temperature Measure");
-		System.out.println(c);
-
 		
 		return (int)c;
 	}

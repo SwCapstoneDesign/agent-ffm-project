@@ -45,7 +45,7 @@ public class CommunicationServiceImpl implements CommunicationService {
 
     @Override
     public String receiveControl(Control control) {
-        return null;
+        return control.toString();
     }
 
     @Override
