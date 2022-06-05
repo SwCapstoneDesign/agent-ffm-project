@@ -62,6 +62,7 @@ public class CommunicationServiceImpl implements CommunicationService {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("watertankId", watertankId);
+        jsonObject.addProperty("farmedFishNo", watertankInfo.getProperty("farmedFishNo"));
         jsonObject.addProperty("temperature", watertankStatus.getTemperature());
         jsonObject.addProperty("ph", watertankStatus.getPh());
         jsonObject.addProperty("oxygen", watertankStatus.getOxygen());
