@@ -70,14 +70,14 @@ public class MotorUtil {
 
     private void foldAction() throws InterruptedException {
         int steps;
-        steps = (512 * 4 * 200) / 360;
+        steps = (256 * 4 * 200) / 360;
 
         step(steps);
     }
 
     private void unfoldAction() throws InterruptedException {
         int steps;
-        steps = (512 * 4 * -200) / 360;
+        steps = (256 * 4 * -200) / 360;
 
         step(steps);
     }
