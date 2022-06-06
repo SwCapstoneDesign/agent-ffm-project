@@ -16,7 +16,7 @@ public class SendStatusScheduler {
 
     private Logger logger = LogManager.getLogger(SendStatusScheduler.class);
 
-    @Scheduled(initialDelay = 1000 * 15, fixedDelay = 1000 * 10)
+    @Scheduled(initialDelay = 1000 * 15, fixedDelay = 1000 * 20)
     public void autoSendData() {
         if (!CommunicationServiceImpl.isWatertankInfoSaved) {
             communicationService.sendWatertank();

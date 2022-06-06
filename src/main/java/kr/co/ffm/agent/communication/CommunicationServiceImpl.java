@@ -2,6 +2,7 @@ package kr.co.ffm.agent.communication;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import kr.co.ffm.agent.work.HeatingPadUtil;
 import okhttp3.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.logging.log4j.LogManager;
@@ -45,8 +46,18 @@ public class CommunicationServiceImpl implements CommunicationService {
     }
 
     @Override
-    public String receiveControl(Control control) {
-        return control.toString();
+    public Control receiveControl(Control control) {
+        String requestControl = control.getControl();
+
+        if ("P".equals(requestControl)) {
+            // 펌프 작동
+            System.out.println("WaterPump Working...");
+        } else if ("H".equals(requestControl)) {
+            HeatingPadUtil heatingPadUtil = new HeatingPadUtil();
+            heatingPadUtil.heating();
+        }
+
+        return control;
     }
 
     @Override
