@@ -4,15 +4,15 @@ import com.pi4j.io.gpio.*;
 
 public class HeatingPadUtil {
     private static GpioController gpio = GpioFactory.getInstance();
-    private static GpioPinDigitalOutput pinWarnNotice = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5), PinState.LOW);
+    private static GpioPinDigitalOutput pinHeating = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5), PinState.LOW);
 
     public void heating() {
         try {
-            pinWarnNotice.high();
+            pinHeating.high();
 
-            Thread.sleep(10000);
+            Thread.sleep(30000);
 
-            pinWarnNotice.low();
+            pinHeating.low();
         } catch (Exception e) {
             e.printStackTrace();
         }
