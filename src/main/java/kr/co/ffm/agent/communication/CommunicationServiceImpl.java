@@ -2,7 +2,7 @@ package kr.co.ffm.agent.communication;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import kr.co.ffm.agent.work.HeatingPadUtil;
+import kr.co.ffm.agent.work.RelayModuleUtil;
 import okhttp3.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class CommunicationServiceImpl implements CommunicationService {
     @Autowired
     private CommunicationUtil communicationUtil;
+
+    private RelayModuleUtil relayModuleUtil = new RelayModuleUtil();
 
     public static boolean isWatertankInfoSaved = false;
     private static Properties watertankInfo;
@@ -50,11 +52,11 @@ public class CommunicationServiceImpl implements CommunicationService {
         String requestControl = control.getControl();
 
         if ("P".equals(requestControl)) {
-            // 펌프 작동
-            System.out.println("WaterPump Working...");
+            logger.info("Working WaterPump...");
+            relayModuleUtil.pump();
         } else if ("H".equals(requestControl)) {
-            HeatingPadUtil heatingPadUtil = new HeatingPadUtil();
-            heatingPadUtil.heating();
+            logger.info("Working HeatingPad...");
+            relayModuleUtil.heating();
         }
 
         return control;

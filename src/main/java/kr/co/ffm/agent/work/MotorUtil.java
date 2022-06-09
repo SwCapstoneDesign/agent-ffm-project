@@ -39,10 +39,10 @@ public class MotorUtil {
             System.out.println("Stop");
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            gpio.shutdown();
+            gpio.unprovisionPin(motorPins);
         }
-
-        gpio.shutdown();
-        gpio.unprovisionPin(motorPins);
     }
 
     private void writeSequence(int sequenceNo) throws InterruptedException {
