@@ -1,12 +1,16 @@
 package kr.co.ffm.agent.work;
 
 import com.pi4j.io.gpio.*;
+import kr.co.ffm.agent.communication.CommunicationServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MotorUtil {
     private int stepDuration = 10;
     private static PinState LOW = PinState.LOW;
     private static PinState HIGH = PinState.HIGH;
 
+    private Logger logger = LogManager.getLogger(MotorUtil.class);
     private GpioController gpio = GpioFactory.getInstance();
     private GpioPinDigitalOutput[] motorPins = new GpioPinDigitalOutput[4];
 
@@ -28,6 +32,7 @@ public class MotorUtil {
         motorPins[3] = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "Pin D", LOW);
 
         try {
+            logger.info("Move Motor");
             System.out.println("Start");
             foldAction();
 
