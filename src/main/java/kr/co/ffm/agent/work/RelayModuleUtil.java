@@ -4,36 +4,38 @@ import com.pi4j.io.gpio.*;
 
 public class RelayModuleUtil {
     private GpioController gpio = GpioFactory.getInstance();
-    private GpioPinDigitalOutput pinHeating = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5), PinState.LOW);
-    private GpioPinDigitalOutput pinPump = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(6), PinState.LOW);
 
     public void heating() {
+        GpioPinDigitalOutput pinHeating = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(5), PinState.LOW);
+
         try {
-            pinHeating.high();
+            pinHeating.low();
 
             Thread.sleep(5000);
 
-            pinHeating.low();
+            pinHeating.high();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            gpio.shutdown();
-            gpio.unprovisionPin(pinHeating);
         }
+
+        gpio.shutdown();
+        gpio.unprovisionPin(pinHeating);
     }
 
     public void pump() {
+        GpioPinDigitalOutput pinPump = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(6), PinState.LOW);
+
         try {
-            pinPump.high();
+            pinPump.low();
 
             Thread.sleep(10000);
 
-            pinPump.low();
+            pinPump.high();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            gpio.shutdown();
-            gpio.unprovisionPin(pinPump);
         }
+
+        gpio.shutdown();
+        gpio.unprovisionPin(pinPump);
     }
 }

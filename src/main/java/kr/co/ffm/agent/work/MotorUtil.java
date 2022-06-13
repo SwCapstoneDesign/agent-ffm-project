@@ -44,10 +44,10 @@ public class MotorUtil {
             System.out.println("Stop");
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            gpio.shutdown();
-            gpio.unprovisionPin(motorPins);
         }
+
+        gpio.shutdown();
+        gpio.unprovisionPin(motorPins);
     }
 
     private void writeSequence(int sequenceNo) throws InterruptedException {
@@ -75,14 +75,14 @@ public class MotorUtil {
 
     private void foldAction() throws InterruptedException {
         int steps;
-        steps = (256 * 4 * 200) / 360;
+        steps = (356 * 4 * 200) / 360;
 
         step(steps);
     }
 
     private void unfoldAction() throws InterruptedException {
         int steps;
-        steps = (256 * 4 * -200) / 360;
+        steps = (356 * 4 * -200) / 360;
 
         step(steps);
     }
